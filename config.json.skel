@@ -1,0 +1,6 @@
+{
+	"db_user": "readonlyuser",
+	"db_password": "secret",
+	"database": "fgtracker",
+	"http_port": 8888
+}
