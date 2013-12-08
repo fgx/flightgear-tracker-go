@@ -6,5 +6,6 @@ import(
 	"database/sql"
 )
 
-//= Global Pointer initialised in main.go
+//= Global DB Pointer initialised in main.go
 var Db *sql.DB
+
