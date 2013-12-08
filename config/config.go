@@ -2,13 +2,14 @@
 package config
 
 import(
+	"log"
 	"os"
-	"ioutil"
+	"io/ioutil"
 	"encoding/json"
-
 )
 
 type Config struct{
+	DbServer string `json:"db_server"`
 	DbUser string `json:"db_user"`
 	DbPassword string `json:"db_password"`
 	Database string `json:"database"`

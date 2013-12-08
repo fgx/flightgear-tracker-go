@@ -1,4 +1,5 @@
 {
+	"db_server": "localhost",
 	"db_user": "readonlyuser",
 	"db_password": "secret",
 	"database": "fgtracker",
