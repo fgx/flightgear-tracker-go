@@ -45,7 +45,8 @@ func main(){
 	//m.Get("/", func() string {
 	//	return "yes"
 	//})
-	router.HandleFunc("/flight/{flight_id}", tracker.FlightHandler)
+	router.HandleFunc("/flights/{callsign}", tracker.FlightsByCallsign_AjaxHandler)
+	router.HandleFunc("/flight/{flight_id}", tracker.Flight_AjaxHandler)
 	
 	http.Handle("/", router)
 	
