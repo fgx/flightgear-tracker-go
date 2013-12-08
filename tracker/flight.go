@@ -31,6 +31,7 @@ type Flight struct {
 
 
 // Return a flight from DB if found
+// TODO: create view
 func GetFlight(flight_id int64)(Flight, error){
 	var flight Flight
 	sql := " SELECT flights.id as flight_id, flights.callsign, flights.status, "
