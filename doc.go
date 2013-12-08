@@ -13,4 +13,5 @@ package main
 
 import(
 	"github.com/fgx/flightgear-tracker-go/tracker"
+	"github.com/fgx/flightgear-tracker-go/config"
 )
