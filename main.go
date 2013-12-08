@@ -9,7 +9,7 @@ import (
 	"database/sql"
 	
 	"net/http"
-	"github.com/codegangsta/martini"
+	"github.com/gorilla/mux"
 	
     "github.com/fgx/flightgear-tracker-go/config"
     "github.com/fgx/flightgear-tracker-go/tracker"
@@ -21,6 +21,7 @@ func main(){
 	conf := config.LoadConfig()
 	log.Println("Loaded config: ", conf)
 
+
 	//= Create DB Connection (tracker.Db is the connection pointer
 	url := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=disable", conf.DbUser, conf.DbPassword, conf.DbServer, conf.Database)	
 	var err error
@@ -28,6 +29,7 @@ func main(){
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	//= Test db connection
 	con_err := tracker.Db.Ping()
 	if con_err != nil {
@@ -36,15 +38,26 @@ func main(){
 	log.Println("DB connected: OK ")
 	defer tracker.Db.Close()
 	
-	//= Setup Martini and routing
-	m := martini.Classic()
-	m.Get("/", func() string {
-		return "yes"
-	})
+
+		
+	//= Setup routing
+	router := mux.NewRouter()
+	//m.Get("/", func() string {
+	//	return "yes"
+	//})
+	router.HandleFunc("/flight/{flight_id}", tracker.FlightHandler)
+	
+	http.Handle("/", router)
+	
+	//= Start Server
+	server_address := fmt.Sprintf(":%d", conf.HttpPort)
+	log.Println("Listening on: ", server_address)
+    if err := http.ListenAndServe(server_address, nil); err != nil {
+		panic(err)
+	}
 	
 	// Lets go !
 	log.Println("Listening on: ", conf.HttpPort)
-	http.ListenAndServe(fmt.Sprintf(":%d", conf.HttpPort) , m)
 	
 	
 }
