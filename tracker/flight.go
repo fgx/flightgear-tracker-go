@@ -21,7 +21,7 @@ type Flight struct {
 	StartTime time.Time `json:"start_time"`
 	EndTime time.Time `json:"end_time"`
 	Duration string `json:"duration"`
-	DurationSecs int64 `json:"duration_secs"`
+	DurationSecs int64 `json:"duration_sec"`
 }
 
 type Waypoint struct {
